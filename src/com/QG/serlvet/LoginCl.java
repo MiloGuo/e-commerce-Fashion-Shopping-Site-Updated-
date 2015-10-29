@@ -29,36 +29,35 @@ public class LoginCl extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		
-		//得到用户名和密码，验证用户是否合法
 		
 		String u=request.getParameter("username");
 		
 		String p=request.getParameter("password");
 		
-		//验证用户
+		
 		UserBeanBO ubb=new UserBeanBO();
 		
 		if(ubb.checkUser(u, p)){
 			
-			//用户合法
+		
 			
-			//1.把成功登录的用户信息放入session【后面用到】
+		
 			
 			UserBean ub=ubb.getUserBean(u);
 			request.getSession().setAttribute("userInfo", ub);
 			
-			//2.把购物车的信息取出，准备下一个页面显示
+		
 			MyCartBO mcb=(MyCartBO)request.getSession().getAttribute("mycart");
 			
 			ArrayList al=mcb.showMyCart();
 			
-			//把al放入request
+		
 			request.setAttribute("mycartInfo", al);
 			
 			request.getRequestDispatcher("shopping3.jsp").forward(request, response);
 		}else{
 			
-			//用户不合法
+			
 			
 			request.getRequestDispatcher("shopping2.jsp").forward(request, response);
 		}
