@@ -24,26 +24,23 @@ public class ShoppingCl2 extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		//´¦ÀíÂÒÂë
+		
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		
-		//Õâ¸ö¿ØÖÆÆ÷£¬ÓÃÓÚÈ¥¼ì²âÓÃ»§ÊÇ·ñµÇÂ¼¹ı£¬Èç¹ûÃ»ÓĞµÇÂ¼¾Í½øÈëµÇÂ¼½çÃæ
-		//Èç¹ûµÇÂ¼¹ı£¬¾ÍÖ±½Ó½øÈëÏÔÊ¾ÓÃ»§ĞÅÏ¢ºÍ¹ºÎï³µÇé¿öµÄÒ³Ãæ
+	
 		
-		//1¿´¿´sessionÖĞÊÇ·ñÓĞÓÃ»§µÇÂ¼µÄĞÅÏ¢
+		//1çœ‹çœ‹sessionä¸­æ˜¯å¦æœ‰ç”¨æˆ·ç™»å½•çš„ä¿¡æ¯
 		
 		UserBean ub=(UserBean)request.getSession().getAttribute("userInfo");
 		
 		if(ub==null){
 			
-			//ËµÃ÷ÓÃ»§Ã»ÓĞµÇÂ¼¹ı
-			//¾ÍÌø×ªµ½shopping2.jsp,
+			
 			request.getRequestDispatcher("shopping2.jsp").forward(request, response);
 			
 		}else{
-			//ËµÃ÷µÇÂ¼¹ı
-			//¾ÍÌø×ªµ½shopping3.jsp
+			/
 			request.getRequestDispatcher("shopping3.jsp").forward(request, response);
 		}
 		
