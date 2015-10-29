@@ -1,6 +1,4 @@
-/**
- * 这是一个model,表示是users表
- */
+
 package com.sp.model;
 
 public class UserBean {
