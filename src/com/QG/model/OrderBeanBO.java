@@ -1,4 +1,4 @@
-//这是model,对orders,orderDetail的处理
+
 package com.sp.model;
 
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class OrderBeanBO {
 
-//	定义一些变量[]
+
 	private ResultSet rs=null;
 	private Connection ct=null;
 	private PreparedStatement ps=null;
@@ -17,33 +17,27 @@ public class OrderBeanBO {
 	
 	
 	
-	/**
-	 * 生成订单
-	 * @param mbo 用户的购物车
-	 * @param userId 用户 id
-	 * @return 返回一个订单详细信息bean【OrderInfoBean】
-	 */
+	
 	public OrderInfoBean addOrder(MyCartBO mbo,String userId){
 		
 		OrderInfoBean oib=new OrderInfoBean();
 		boolean b=true;
 		try {
 			
-			//真的代码..
+			
 			ct=new ConnDB().getConn();
 			ps=ct.prepareStatement("insert into orders (userId,isPayed,totalPrice)  values(?,?,?)");
 			ps.setString(1, userId);
 			ps.setByte(2, (byte)0);
 			ps.setFloat(3, mbo.getAllPrice());
 			
-			//执行
+			
 			int a=ps.executeUpdate();
 			
 			if(a==1){
 				
 				
-				//必须取出刚刚添加到orders表的那个订单号
-				//取出最后那条的orders的id就是
+				
 				
 				ps=ct.prepareStatement("select max(ordersId) from orders");
 				
@@ -57,14 +51,9 @@ public class OrderBeanBO {
 				}
 				
 				
-				//orders表添加ok
-				//添加ordersDetail表
-				
-				//从购物车中取出所有选购的商品
 				ArrayList al=mbo.showMyCart();
 				
-				//循环的添加到orderDetail表//!!!
-				//我们可以使用批量操作数据库的方法，提供操作数据库的效率.
+			
 				Statement sm=ct.createStatement();
 				for(int i=0;i<al.size();i++){
 					
@@ -73,10 +62,10 @@ public class OrderBeanBO {
 					
 				}
 				
-				//批量执行添加任务呢
+				
 				sm.executeBatch();
 				
-				//多表查询,
+				
 				String sql="select ordersId ,truename,address,postcode,phone,totalPrice,username,email from users,orders"+ 
 				" where ordersId=? and users.userid = (select orders.userid from orders where ordersId=?)";
 				
@@ -88,7 +77,7 @@ public class OrderBeanBO {
 				
 				if(rs.next()){
 					
-					//将rs封装到OrderInfoBean
+				
 					oib.setOrdersId(rs.getInt(1));
 					oib.setTruename(rs.getString(2));
 					oib.setAddress(rs.getString(3));
@@ -108,7 +97,7 @@ public class OrderBeanBO {
 			// TODO: handle exception
 		}finally{
 			
-			//关闭资源
+			
 			this.close();
 		}
 		if(b){
@@ -119,7 +108,7 @@ public class OrderBeanBO {
 	}
 	
 	
-//关闭函数
+
 	
 	public void close(){
 		
