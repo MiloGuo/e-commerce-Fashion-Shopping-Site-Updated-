@@ -1,6 +1,4 @@
-/**
- * 这是一个model(处理与users表相关的业务逻辑)
- */
+
 package com.sp.model;
 
 import java.sql.Connection;
@@ -9,16 +7,12 @@ import java.sql.ResultSet;
 
 public class UserBeanBO {
 	
-	//	定义一些变量[]
+
 	private ResultSet rs=null;
 	private Connection ct=null;
 	private PreparedStatement ps=null;
 
-	/**
-	 * 根据用户名返回该用户的全部信息
-	 * @param u：用户名
-	 * @return userbean
-	 */
+
 	
 	public UserBean getUserBean(String u){
 		
@@ -45,7 +39,7 @@ public class UserBeanBO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			// TODO: handle exception
+			
 		}finally{
 			this.close();
 		}
@@ -53,12 +47,8 @@ public class UserBeanBO {
 		return ub;
 	}
 	
-	/**
-	 * 验证用户是否合法
-	 * @param u
-	 * @param p
-	 * @return
-	 */
+
+	
 	public boolean checkUser(String u,String p){
 		
 		
@@ -67,11 +57,11 @@ public class UserBeanBO {
 		
 		try {
 			
-			//sql注入漏洞
+			
 			
 			ct=new ConnDB().getConn();
 			
-			//top 1表示查到一条记录就返回，提高查询速度
+		
 			ps=ct.prepareStatement("select top 1 passwd from users where username=?");
 			
 			ps.setString(1, u);
@@ -80,7 +70,7 @@ public class UserBeanBO {
 			
 			if(rs.next()){
 				
-				//取出数据库的密码
+			
 				String dbPasswd=rs.getString(1);
 				
 				if(dbPasswd.equals(p)){
@@ -93,15 +83,14 @@ public class UserBeanBO {
 			// TODO: handle exception
 		}finally{
 			
-			//关闭资源
+		
 			this.close();
 		}
 		
 		return b;
 		
 	}
-//关闭函数
-	
+
 	public void close(){
 		
 		try {
