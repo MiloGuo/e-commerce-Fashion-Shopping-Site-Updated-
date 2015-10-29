@@ -30,17 +30,14 @@ public class ShoppingClServlet extends HttpServlet {
 		
 		
 		
-		//得到type值，判断用户是要进行怎样的操作
-		String type=request.getParameter("type");
-		//解决多个购物车问题
 		
-		//1.先试图从session中取出一个购车车
+		String type=request.getParameter("type");
+		
 		MyCartBO mbo=(MyCartBO)request.getSession().getAttribute("mycart");
 		
 		if(mbo==null){
 			
-			//说明该用户第一次购物
-			//创建一个购物车，并放入sesion
+			
 			mbo=new MyCartBO();
 			request.getSession().setAttribute("mycart", mbo);
 		}
@@ -48,48 +45,42 @@ public class ShoppingClServlet extends HttpServlet {
 		if(type.equals("addGoods")){
 		
 		
-		//获得要购物的货物的id
+	
 		String goodsId=request.getParameter("goodsId");
 		
-		//调用MyCartBO[购物车],完成购物
-		//MyCartBO mbo=new MyCartBO();//?????这样会造成有多个购物车!!![现在，我们必须想办法，保证始终只有一个购物车 ] [session???]
+	
 		
 		
 		
 		
-		//默认购买是1本书，以后可以修改
 		mbo.addGoods(goodsId, "1");
 		
 		
 		}else if(type.equals("delGoods")){
 			
 			
-			//得到要删除的货物的id
+			
 			String goodsId=request.getParameter("goodsId");
 			
-			//从购物车中删除(从session中)
+			
 			mbo.delGoods(goodsId);
 		}else if(type.equals("show")){
-			//do nothing
+			
 		}else if(type.equals("delAll")){
 			
 			mbo.clear();
 		}else if(type.equals("updateGoods")){
 			
-			//用户希望修改数量
 			
-			//怎样在servlet中得到货物的id,和新的数量
-			
-			//接收货物id 
 			
 			String goodsId[]=request.getParameterValues("goodsId");
 			String newNums[]=request.getParameterValues("newNums");
 			
-			//测试一下看看是否得到新的修改值
+			
 			for(int i=0;i<goodsId.length;i++){
 				
-				System.out.println("id==="+goodsId[i]+"  数量="+newNums[i]);
-				//修改
+				System.out.println("id==="+goodsId[i]+"  鏁伴噺="+newNums[i]);
+			
 				mbo.upGoods(goodsId[i], newNums[i]);
 			}
 			
@@ -97,14 +88,13 @@ public class ShoppingClServlet extends HttpServlet {
 			
 		}
 		
-		
-		//把购物车的货物取出，准备在下一个页面显示
+	
 		
 		ArrayList al=mbo.showMyCart();
 		
-		//放入到request
+		
 		request.setAttribute("mycartinfo", al);
-		//跳转到
+		
 		request.getRequestDispatcher("showMycart.jsp").forward(request, response);
 		
 	}
