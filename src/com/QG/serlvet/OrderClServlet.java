@@ -27,25 +27,22 @@ public class OrderClServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		
-		//处理完成订单(把订单写入数据库)
-		//该任务将会交给OrderBeanBO
+	
 		
 		OrderBeanBO obb=new OrderBeanBO();
 		
-		//得到购物车
+	
 		MyCartBO mcb=(MyCartBO)request.getSession().getAttribute("mycart");
-		//用户id
+		
 		long userId=((UserBean)request.getSession().getAttribute("userInfo")).getUserid();
 		OrderInfoBean oib=obb.addOrder(mcb, userId+"");
 		if(oib!=null){
 			
-			//添加ok
-			//准备显示订单的详细信息的数据,给下个页面shopping4.jsp
 			
 			request.setAttribute("detailbean", oib);
 			request.getRequestDispatcher("shopping4.jsp").forward(request, response);
 		}else{
-			//添加订单失败
+			
 			request.getRequestDispatcher("shopping3.jsp").forward(request, response);
 		}
 		
