@@ -1,5 +1,4 @@
-//这是一个model类
-//完成得到一个数据库连接
+
 package com.sp.model;
 import java.sql.*;
 
