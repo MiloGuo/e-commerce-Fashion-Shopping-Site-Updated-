@@ -1,18 +1,15 @@
-//这是model类，处理与goods表相关的业务逻辑
+
 package com.sp.model;
 import java.sql.*;
 import java.util.ArrayList;
 public class GoodsBeanBO {
 	
-	//定义一些变量[]
+	
 	private ResultSet rs=null;
 	private Connection ct=null;
 	private PreparedStatement ps=null;
 	
-	/**
-	 * 返回共有多少页
-	 * 
-	 */
+	
 	
 	public int getPageCount(int pageSize){
 		
@@ -24,7 +21,7 @@ public class GoodsBeanBO {
 			
 			ps=ct.prepareStatement("select count(*) from goods");
 			
-			//得到总有多少条记录
+			
 			rs=ps.executeQuery();
 			
 			if(rs.next()){
@@ -43,7 +40,7 @@ public class GoodsBeanBO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			// TODO: handle exception
+			
 		}finally{
 			
 			this.close();
@@ -53,14 +50,7 @@ public class GoodsBeanBO {
 	}
 	
 	
-	/**
-	 * 分页显示货物的信息
-	 * @prameter int pageSize:每页显示几条记录
-	 * @author 顺平
-	 * @prameter int pageNow:显示第几页
-	 * @return ArrayList 【就是要显示货物集合】
-	 * ctrl+shift+m(可以引入包)
-	 */
+	
 	public ArrayList getGoodsByPage(int pageSize,int pageNow){
 		
 		ArrayList al=new ArrayList();
@@ -88,7 +78,7 @@ public class GoodsBeanBO {
 				gb.setPhoto(rs.getString(7));
 				gb.setType(rs.getString(8));
 				
-				//加入到al
+				
 				
 				al.add(gb);
 				
@@ -106,7 +96,7 @@ public class GoodsBeanBO {
 		return al;
 	}
 	
-	//根据一个货物id,得到货物具体信息的函数
+	
 	public GoodsBean getGoodsBean(String id){
 		
 		
@@ -123,7 +113,6 @@ public class GoodsBeanBO {
 			if(rs.next()){
 				
 				
-				//放入到gb
 				gb.setGoodsId(rs.getInt(1));
 				gb.setGoodsName(rs.getString(2));
 				gb.setGoodsIntro(rs.getString(3));
@@ -140,7 +129,7 @@ public class GoodsBeanBO {
 			// TODO: handle exception
 		}finally{
 			
-			//关闭资源
+			
 			this.close();
 		}
 		
@@ -148,7 +137,7 @@ public class GoodsBeanBO {
 		
 	}
 	
-	//关闭函数
+
 	
 	public void close(){
 		
