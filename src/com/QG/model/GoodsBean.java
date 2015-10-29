@@ -1,5 +1,4 @@
 
-//这是一个model类<----->goods表
 package com.sp.model;
 
 public class GoodsBean {
