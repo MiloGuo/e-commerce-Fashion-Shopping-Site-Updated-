@@ -1,5 +1,5 @@
 package com.sp.model;
-//这是一个信息最全的javabean
+
 public class OrderInfoBean {
 
 	private int userid;
