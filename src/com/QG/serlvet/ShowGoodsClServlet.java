@@ -27,37 +27,35 @@ public class ShowGoodsClServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		
-		//得到type,判断用户是想分页，还是想显示货物的详细信息
 		
 		String type=request.getParameter("type");
 		
 		
 		if(type.equals("showDetail")){
 		
-		//得到要显示的货物的id
+		
 		String goodsId=request.getParameter("id");
-		//调用GoodsBeanBO(小红)[可以给你得到货物的具体信息]
+		
 		GoodsBeanBO gbb=new GoodsBeanBO();
 		
 		GoodsBean gb=gbb.getGoodsBean(goodsId);
 		
-		//把gb放入request
+	
 		
 		request.setAttribute("goodsInfo", gb);
 		
-		//跳转
+	
 		
 		request.getRequestDispatcher("showDetail.jsp").forward(request, response);
 		}else if(type.equals("fenye")) {
 			
-			//得到pageNow
+		
 			String pageNow=request.getParameter("pageNow");
 			
 			
-			//把pageNow放入到request
-			request.setAttribute("abc", pageNow);
-			//跳回购物大厅
 			
+			request.setAttribute("abc", pageNow);
+		
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		
