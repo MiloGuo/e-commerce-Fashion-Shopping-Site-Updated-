@@ -1,4 +1,4 @@
-//这是一个model 和 orders表对应
+
 package com.sp.model;
 
 public class OrderBean {
