@@ -74,9 +74,9 @@ public class MyCartBO {
 			String sub="(";
 			while(it.hasNext()){
 				
-				//取出goodsId
+				
 				String goodsId=(String)it.next();
-				//判断goodsId是不是最后id
+				
 				if(it.hasNext()){
 				sub+=goodsId+",";
 				}else{
