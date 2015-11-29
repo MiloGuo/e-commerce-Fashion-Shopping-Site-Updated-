@@ -79,7 +79,7 @@ public class ShoppingClServlet extends HttpServlet {
 			
 			for(int i=0;i<goodsId.length;i++){
 				
-				System.out.println("id==="+goodsId[i]+"  数量="+newNums[i]);
+				System.out.println("id==="+goodsId[i]+"  quantity="+newNums[i]);
 			
 				mbo.upGoods(goodsId[i], newNums[i]);
 			}
