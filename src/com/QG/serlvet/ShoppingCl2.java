@@ -30,7 +30,7 @@ public class ShoppingCl2 extends HttpServlet {
 		
 	
 		
-		//1看看session中是否有用户登录的信息
+		
 		
 		UserBean ub=(UserBean)request.getSession().getAttribute("userInfo");
 		
